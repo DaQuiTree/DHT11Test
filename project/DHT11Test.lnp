@@ -1,0 +1,5 @@
+".\DHT11.obj",
+".\main.obj",
+".\LCD12864.obj" 
+TO "DHT11Test" 
+RAMSIZE(256) 

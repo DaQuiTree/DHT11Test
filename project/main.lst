@@ -1,0 +1,50 @@
+C51 COMPILER V8.08   MAIN                                                                  05/29/2017 18:30:53 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN ..\output\main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(..\outp
+                    -ut\main.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "lcd12864.h"
+   3          #include "DHT11.h"      
+   4          
+   5          void main()
+   6          {
+   7   1              uint8 temp,humi;
+   8   1              uint16 dat[3];
+   9   1      
+  10   1              InitLCD12864();
+  11   1              ConfigureDHT11();
+  12   1              DHT11GetData(&humi, &temp);
+  13   1      
+  14   1              dat[0] = temp/10 + 0xA3B0;
+  15   1              dat[1] = temp%10 + 0xA3B0;
+  16   1              dat[2] = 0xA1E6; 
+  17   1              LCDShowCN(3,1,dat,3);  //ÎÂ¶È
+  18   1      
+  19   1              dat[0] = humi/10 + 0xA3B0;
+  20   1              dat[1] = humi%10 + 0xA3B0;
+  21   1              dat[2] = 0xA3A5; 
+  22   1              LCDShowCN(3,2,dat,3);  //Êª¶È
+  23   1      
+  24   1              while(1);
+  25   1      }
+  26          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    134    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,5 @@
+"..\output\DHT11.obj",
+"..\output\main.obj",
+"..\output\LCD12864.obj" 
+TO "..\output\DHT11Test" 
+PRINT(".\DHT11Test.m51") RAMSIZE(256) 
