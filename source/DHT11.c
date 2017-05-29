@@ -38,11 +38,13 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 	DelayX10us(8);	
 
 	while(cnt--){
-		while(!DHT11_DATA);	//等待高电平到来		  
+		while(!DHT11_DATA);	//等待高电平到来
+		EA = 0;		  
 		TL1 = 0;
 		TR1 = 1;
 		while(DHT11_DATA);	//等待高电平结束
 		TR1 = 0;			//结束计时
+		EA = 1;
 		if(TL1 < 30){  //低电平
 			mdat <<= 1; 
 		}else{			//高电平

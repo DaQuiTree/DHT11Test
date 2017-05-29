@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DHT11                                                                 05/29/2017 18:30:52 PAGE 1   
+C51 COMPILER V8.08   DHT11                                                                 05/29/2017 18:49:15 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
@@ -48,38 +48,40 @@ line level    source
   38   1              DelayX10us(8);  
   39   1      
   40   1              while(cnt--){
-  41   2                      while(!DHT11_DATA);     //等待高电平到来                  
-  42   2                      TL1 = 0;
-  43   2                      TR1 = 1;
-  44   2                      while(DHT11_DATA);      //等待高电平结束
-  45   2                      TR1 = 0;                        //结束计时
-  46   2                      if(TL1 < 30){  //低电平
-  47   3                              mdat <<= 1; 
-  48   3                      }else{                  //高电平
-  49   3                              mdat <<= 1;
-  50   3                              mdat |= 0x1;
-  51   3                      }               
-  52   2              }
-  53   1      
-  54   1              *humi = (uint8)(mdat >> 24);
-C51 COMPILER V8.08   DHT11                                                                 05/29/2017 18:30:52 PAGE 2   
+  41   2                      while(!DHT11_DATA);     //等待高电平到来
+  42   2                      EA = 0;           
+  43   2                      TL1 = 0;
+  44   2                      TR1 = 1;
+  45   2                      while(DHT11_DATA);      //等待高电平结束
+  46   2                      TR1 = 0;                        //结束计时
+  47   2                      EA = 1;
+  48   2                      if(TL1 < 30){  //低电平
+  49   3                              mdat <<= 1; 
+  50   3                      }else{                  //高电平
+  51   3                              mdat <<= 1;
+  52   3                              mdat |= 0x1;
+  53   3                      }               
+  54   2              }
+C51 COMPILER V8.08   DHT11                                                                 05/29/2017 18:49:15 PAGE 2   
 
-  55   1              *temp = (uint8)(mdat >> 8);
-  56   1              return 1;       
-  57   1      }
-  58          
-  59          void ConfigureDHT11()
-  60          {
-  61   1              TMOD &= 0x0F;
-  62   1              TMOD |= 0x10;
-  63   1      
-  64   1              ET1 = 0;
-  65   1              PT1 = 1;        //定时器1设置高优先级
-  66   1      }
+  55   1      
+  56   1              *humi = (uint8)(mdat >> 24);
+  57   1              *temp = (uint8)(mdat >> 8);
+  58   1              return 1;       
+  59   1      }
+  60          
+  61          void ConfigureDHT11()
+  62          {
+  63   1              TMOD &= 0x0F;
+  64   1              TMOD |= 0x10;
+  65   1      
+  66   1              ET1 = 0;
+  67   1              PT1 = 1;        //定时器1设置高优先级
+  68   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    215    ----
+   CODE SIZE        =    219    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
